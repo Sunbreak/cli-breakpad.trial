@@ -83,7 +83,8 @@ Segmentation fault (core dumped)
 ### macOS
 
 ```sh
-$ ./breakpad/mac/dump_syms build/cli-breakpad > cli-breakpad.sym
+$ dsymutil ./build/cli-breakpad -o cli-breakpad.dSYM
+$ ./breakpad/mac/dump_syms cli-breakpad.dSYM > cli-breakpad.sym
 $ uuid=`awk 'FNR==1{print \$4}' cli-breakpad.sym`
 $ mkdir -p symbols/cli-breakpad/$uuid/
 $ mv ./cli-breakpad.sym symbols/cli-breakpad/$uuid/
