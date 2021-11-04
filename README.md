@@ -106,7 +106,7 @@ cp $BREAKPAD/src/src/processor/minidump_stackwalk ./breakpad/linux/$(arch)
 ```bat
 rem Developer Command Prompt
 > cmake -S . -Bbuild
-> cmake --build build
+> cmake --build build --config Debug
 > build\Debug\cli-breakpad
 dump_path: .
 minidump_id: 887a36fe-d37e-4b79-97c4-133e36a1c24e
