@@ -61,9 +61,18 @@ cd $BREAKPAD/src/tool/mac/dump_syms && xcodebuild -target dump_syms
 
 ### Linux
 
+- build `x86_64 on x86_64` or `aarch64 on aarch64`
+
 ```sh
 cd $BREAKPAD/src
 ./configure && make
+```
+
+- build `aarch64 on x86_64`
+
+```sh
+cd $BREAKPAD/src
+./configure CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ AR=aarch64-linux-gnu-gcc-ar RANLIB=aarch64-linux-gnu-gcc-ranlib --host=aarch64-linux-gnu
 ```
 
 ## Install library && tools
@@ -91,10 +100,11 @@ mkdir Frameworks && cd Frameworks && ln -s ../breakpad/mac/Breakpad.framework .
 ### Linux
 
 ```sh
-mkdir -p ./breakpad/linux/$(arch)
-cp $BREAKPAD/src/src/client/linux/libbreakpad_client.a ./breakpad/linux/$(arch)
-cp $BREAKPAD/src/src/tools/linux/dump_syms/dump_syms ./breakpad/linux/$(arch)
-cp $BREAKPAD/src/src/processor/minidump_stackwalk ./breakpad/linux/$(arch)
+# targetArch=x86_64 or aarch64
+mkdir -p ./breakpad/linux/$targetArch
+cp $BREAKPAD/src/src/client/linux/libbreakpad_client.a ./breakpad/linux/$targetArch
+cp $BREAKPAD/src/src/tools/linux/dump_syms/dump_syms ./breakpad/linux/$targetArch
+cp $BREAKPAD/src/src/processor/minidump_stackwalk ./breakpad/linux/$targetArch
 ```
 
 # Use breakpad for cli-breakpad
@@ -125,6 +135,7 @@ minidump_id: 64C31053-BBE4-400C-9588-B29F63E08E71
 ### Linux
 
 ```sh
+# cli-breakpad is too simple for cross-compiling
 $ cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=RelWithDebInfo
 $ cmake --build build
 $ ./build/cli-breakpad
