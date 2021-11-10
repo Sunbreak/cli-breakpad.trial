@@ -44,6 +44,8 @@ common.vcxproj -> C:\Users\sunbr\google\breakpad\src\client\windows\Debug\lib\co
 crash_generation_client.vcxproj -> C:\Users\sunbr\google\breakpad\src\client\windows\Debug\lib\crash_generation_client.lib
 ```
 
+> Patch [Fix missing <memory> header for Windows dump_syms](https://github.com/Sunbreak/breakpad/commit/a271d5b7f60db63ef010a3551d93538717be302e) onto $BREAKPAD/src
+
 ```bat
 > cd %BREAKPAD%\src\tools\windows\dump_syms
 > DevEnv dump_syms.sln /Upgrade
